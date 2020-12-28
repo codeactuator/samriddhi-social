@@ -26,7 +26,7 @@ import javax.mail.internet.MimeMultipart;
 public class EmailServices {
 
     private static final String USER_NAME = "shekharkumargupta@gmail.com";
-    private static final String PASSWORD = "magic@30";
+    private static final String PASSWORD = "XXXXXXXX";
 
     public static void sendMail(String subject, String htmlMessageString, String to) {
         Properties props = System.getProperties();
