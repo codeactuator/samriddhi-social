@@ -7,14 +7,9 @@ package com.codeactuator.samriddhi.domain;
 import com.codeactuator.samriddhi.App;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -33,40 +28,40 @@ public class Person implements Serializable {
     @GeneratedValue
     private long id;
     private String name;
-    private Relation relation;
-    private Map<String, Person> relatives;
+    @OneToMany
+    private List<Relative> relatives;
 
-    public Person(String name, int sex){
+    public void addRelative(Relative relative){
+        if(relatives != null && !relatives.contains(relative)){
+            relatives.add(relative);
+        }else{
+            relatives = new ArrayList<>();
+            relatives.add(relative);
+        }
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
-        this.relatives = new HashMap<>();
-        this.relation = new Relation(0, 0, sex, true, false, true, "ME");
     }
 
-    public void addRelative(String name, Relation relationWithPerson){
-        Person relative = new Person(name, relation.sex);
-        relative.setRelation(relationWithPerson);
-        relatives.put(name, relative);
+    public List<Relative> getRelatives() {
+        return relatives;
     }
 
-    public Map<String, Person> getRelatives(){
-        return this.relatives;
-    }
-
-    public Person getRelativeByName(String name){
-        return this.relatives.get(name);
-    }
-
-
-    public String getName(){
-        return this.name;
-    }
-
-    public void setRelation(Relation relation){
-        this.relation = relation;
-    }
-
-    public Relation getRelation(){
-        return this.relation;
+    public void setRelatives(List<Relative> relatives) {
+        this.relatives = relatives;
     }
 
     @Override
@@ -74,15 +69,13 @@ public class Person implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return id == person.id &&
-                Objects.equals(name, person.name) &&
-                Objects.equals(relation, person.relation);
+        return id == person.id;
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, relation);
+        return Objects.hash(id);
     }
 
     @Override
@@ -90,7 +83,6 @@ public class Person implements Serializable {
         return "Person{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", relation=" + relation +
                 ", relatives=" + relatives +
                 '}';
     }

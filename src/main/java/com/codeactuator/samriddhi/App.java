@@ -10,9 +10,9 @@ public class App {
     public static void main(String args[]){
         RelationService relationService = new RelationServiceImpl();
 
-        relationService.find("NEHA", "ANJALI", "SHEKHAR");
-        relationService.find("NEHA", "ROHIT", "SHEKHAR");
-        relationService.find("NEHA", "SHRAVAN", "SHEKHAR");
+        //relationService.find("NEHA", "ANJALI", "SHEKHAR");
+        //relationService.find("NEHA", "ROHIT", "SHEKHAR");
+        //relationService.find("NEHA", "SHRAVAN", "SHEKHAR");
     }
 }
 
