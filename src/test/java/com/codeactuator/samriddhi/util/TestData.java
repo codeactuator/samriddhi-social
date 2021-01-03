@@ -5,99 +5,15 @@ import com.codeactuator.samriddhi.domain.Person;
 import com.codeactuator.samriddhi.domain.Relation;
 import com.codeactuator.samriddhi.domain.Relative;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class DataUtil {
+public class TestData {
 
-    static Map<Relation, String> relations = new HashMap();
+
     static Map<Long, Person> people = new HashMap();
 
     static {
-
-        //Creating some relationship definition
-        Relation me = new Relation(0, 0, 1, true, false, true, Relations.ME.getRelation());
-
-        Relation father = new Relation(0, 1, 1, true, false, true, Relations.FATHER.getRelation());
-        Relation mother = new Relation(0, 1, 0, false, false, true, Relations.MOTHER.getRelation());
-
-        Relation uncle = new Relation(1, 1, 1, true, false, false, Relations.UNCLE.getRelation());
-        Relation aunty = new Relation(1, 1, 0, false, false, false, Relations.AUNTY.getRelation());
-
-        Relation fatherInLaw = new Relation(0, 1, 1, true, true, true, Relations.FATHER_IN_LAW.getRelation());
-        Relation motherInLaw = new Relation(0, 1, 0, false, true, true, Relations.MOTHER_IN_LAW.getRelation());
-
-        Relation fatherInLawNonSibling = new Relation(1, 1, 1, true, true, false, Relations.FATHER_IN_LAW_NON_SIBLING.getRelation());
-        Relation motherInLawNonSibling = new Relation(1, 1, 0, false, true, false, Relations.MOTHER_IN_LAW_NON_SIBLING.getRelation());
-
-        Relation brother = new Relation(1, 0, 1, true, false, true, Relations.BROTHER.getRelation());
-        Relation brotherNonSibling = new Relation(1, 0, 1, true, false, false, Relations.BROTHER_NON_SIBLING.getRelation());
-        Relation brotherWife = new Relation(1, 0, 0, false, true, true, Relations.BROTHERS_WIFE.getRelation());
-        Relation brotherWifeNonSibling = new Relation(1, 0, 0, false, true, false, Relations.BROTHERS_WIFE_NON_SIBLING.getRelation());
-
-        Relation sister = new Relation(1, 0, 0, true, false, true, Relations.SISTER.getRelation());
-        Relation sisterNonSibling = new Relation(1, 0, 0, true, false, false, Relations.SISTER_NON_SIBLING.getRelation());
-        Relation sistersHusband = new Relation(1, 0, 1, false, true, true, Relations.SISTERS_HUSBAND.getRelation());
-        Relation sistersHusbandNonSibling = new Relation(1, 0, 1, false, true, false, Relations.SISTERS_HUSBAND_NON_SIBLING.getRelation());
-
-        Relation wife = new Relation(0, 0, 0, false, true, true, Relations.WIFE.getRelation());
-        Relation husband = new Relation(0, 0, 1, true, true, true, Relations.HUSBAND.getRelation());
-
-        Relation brotherInLaw = new Relation(1, 0, 1, true, true, true, Relations.BROTHER_IN_LAW.getRelation());
-        Relation sisterInLaw = new Relation(1, 0, 0, true, true, true, Relations.SISTER_IN_LAW.getRelation());
-
-        Relation brotherInLawNonSibling = new Relation(1, 0, 1, true, true, false, Relations.BROTHER_IN_LAW_NON_SIBLING.getRelation());
-        Relation sisterInLawNonSibling = new Relation(1, 0, 0, true, true, false, Relations.SISTER_IN_LAW_NON_SIBLING.getRelation());
-
-
-        Relation son = new Relation(0, -1, 1, true, false, true, Relations.SON.getRelation());
-        Relation daughter = new Relation(0, -1, 0, true, false, true, Relations.DOUGHTER.getRelation());
-
-
-        relations.put(me, me.getName());
-
-        relations.put(father, father.getName());
-        relations.put(mother, mother.getName());
-
-        relations.put(uncle, uncle.getName());
-        relations.put(aunty, aunty.getName());
-
-        relations.put(fatherInLaw, fatherInLaw.getName());
-        relations.put(motherInLaw, motherInLaw.getName());
-
-        relations.put(fatherInLawNonSibling, fatherInLawNonSibling.getName());
-        relations.put(motherInLawNonSibling, motherInLawNonSibling.getName());
-
-        relations.put(brother, brother.getName());
-        relations.put(brotherNonSibling, brotherNonSibling.getName());
-        relations.put(brotherWife, brotherWife.getName());
-        relations.put(brotherWifeNonSibling, brotherWifeNonSibling.getName());
-
-        relations.put(sister, sister.getName());
-        relations.put(sisterNonSibling, sisterNonSibling.getName());
-        relations.put(sistersHusband, sistersHusband.getName());
-        relations.put(sistersHusbandNonSibling, sistersHusbandNonSibling.getName());
-
-        relations.put(wife, wife.getName());
-        relations.put(husband, husband.getName());
-
-        relations.put(brotherInLaw, brotherInLaw.getName());
-        relations.put(sisterInLaw, sisterInLaw.getName());
-
-        relations.put(brotherInLawNonSibling, brotherInLawNonSibling.getName());
-        relations.put(sisterInLawNonSibling, sisterInLawNonSibling.getName());
-
-
-        relations.put(son, son.getName());
-        relations.put(daughter, daughter.getName());
-
-
         //Initialize some people
-
-
-        //Person shekhar = new Person("SHEKHAR", 1);
-        //Person ranjeet = new Person("RANJEET", 1);
-
         Person shekhar = new Person();
         shekhar.setId(1);
         shekhar.setName("SHEKHAR");
@@ -171,96 +87,95 @@ public class DataUtil {
         laloDevi.setName("LALO DEVI");
 
 
-
         Relative shekharRelative = new Relative();
         shekharRelative.setId(new Long(1));
         shekharRelative.setPerson(shekhar);
-        shekharRelative.setRelation(me);
+        shekharRelative.setRelation(RelationUtil.getRelationByName(Relations.ME));
 
         Relative anjaliRelative = new Relative();
         anjaliRelative.setId(new Long(2));
         anjaliRelative.setPerson(anjali);
-        anjaliRelative.setRelation(wife);
+        anjaliRelative.setRelation(RelationUtil.getRelationByName(Relations.WIFE));
 
         Relative opGuptaRelative = new Relative();
         opGuptaRelative.setId(new Long(3));
         opGuptaRelative.setPerson(opGupta);
-        opGuptaRelative.setRelation(father);
+        opGuptaRelative.setRelation(RelationUtil.getRelationByName(Relations.FATHER));
 
         Relative ushaDeviRelative = new Relative();
         ushaDeviRelative.setId(new Long(4));
         ushaDeviRelative.setPerson(ushaDevi);
-        ushaDeviRelative.setRelation(mother);
+        ushaDeviRelative.setRelation(RelationUtil.getRelationByName(Relations.MOTHER));
 
         Relative rameshRelative = new Relative();
         rameshRelative.setId(new Long(5));
         rameshRelative.setPerson(ramesh);
-        rameshRelative.setRelation(brother);
+        rameshRelative.setRelation(RelationUtil.getRelationByName(Relations.BROTHER));
 
         Relative shravanRelative = new Relative();
         shravanRelative.setId(new Long(6));
         shravanRelative.setPerson(shravan);
-        shravanRelative.setRelation(brother);
+        shravanRelative.setRelation(RelationUtil.getRelationByName(Relations.BROTHER));
 
         Relative sujeetRelative = new Relative();
         sujeetRelative.setId(new Long(7));
         sujeetRelative.setPerson(sujeet);
-        sujeetRelative.setRelation(brother);
+        sujeetRelative.setRelation(RelationUtil.getRelationByName(Relations.BROTHER));
 
         Relative sanjeetRelative = new Relative();
         sanjeetRelative.setId(new Long(8));
         sanjeetRelative.setPerson(sanjeet);
-        sanjeetRelative.setRelation(brotherNonSibling);
+        sanjeetRelative.setRelation(RelationUtil.getRelationByName(Relations.BROTHER_NON_SIBLING));
 
         Relative ranjeetRelative = new Relative();
         ranjeetRelative.setId(new Long(9));
         ranjeetRelative.setPerson(ranjeet);
-        ranjeetRelative.setRelation(brother);
+        ranjeetRelative.setRelation(RelationUtil.getRelationByName(Relations.BROTHER_NON_SIBLING));
 
         Relative chhotiRelative = new Relative();
         chhotiRelative.setId(new Long(10));
         chhotiRelative.setPerson(chhoti);
-        chhotiRelative.setRelation(sister);
+        chhotiRelative.setRelation(RelationUtil.getRelationByName(Relations.SISTER));
 
         Relative praveenKumarRelative = new Relative();
         praveenKumarRelative.setId(new Long(11));
         praveenKumarRelative.setPerson(praveenKumar);
-        praveenKumarRelative.setRelation(fatherInLaw);
+        praveenKumarRelative.setRelation(RelationUtil.getRelationByName(Relations.FATHER_IN_LAW));
 
         Relative nilamDeviRelative = new Relative();
         nilamDeviRelative.setId(new Long(12));
         nilamDeviRelative.setPerson(nilamDevi);
-        nilamDeviRelative.setRelation(motherInLaw);
+        nilamDeviRelative.setRelation(RelationUtil.getRelationByName(Relations.MOTHER_IN_LAW));
 
         Relative rohitRelative = new Relative();
         rohitRelative.setId(new Long(13));
         rohitRelative.setPerson(rohit);
-        rohitRelative.setRelation(brotherInLaw);
+        rohitRelative.setRelation(RelationUtil.getRelationByName(Relations.BROTHER_IN_LAW));
 
         Relative nehaRelative = new Relative();
         nehaRelative.setId(new Long(14));
         nehaRelative.setPerson(neha);
-        nehaRelative.setRelation(sisterInLaw);
+        nehaRelative.setRelation(RelationUtil.getRelationByName(Relations.SISTER_IN_LAW));
 
         Relative ashokKumarUncleRelative = new Relative();
         ashokKumarUncleRelative.setId(new Long(15));
         ashokKumarUncleRelative.setPerson(ashokKumar);
-        ashokKumarUncleRelative.setRelation(uncle);
+        ashokKumarUncleRelative.setRelation(RelationUtil.getRelationByName(Relations.UNCLE));
 
         Relative lalmuniDeviAuntyRelative = new Relative();
         lalmuniDeviAuntyRelative.setId(new Long(16));
         lalmuniDeviAuntyRelative.setPerson(lalmuniDevi);
-        lalmuniDeviAuntyRelative.setRelation(aunty);
+        lalmuniDeviAuntyRelative.setRelation(RelationUtil.getRelationByName(Relations.AUNTY));
 
         Relative kishorKumarUncleRelative = new Relative();
         kishorKumarUncleRelative.setId(new Long(17));
         kishorKumarUncleRelative.setPerson(kishorKumar);
-        kishorKumarUncleRelative.setRelation(uncle);
+        kishorKumarUncleRelative.setRelation(RelationUtil.getRelationByName(Relations.UNCLE));
 
         Relative laloDeviAntyRelative = new Relative();
         laloDeviAntyRelative.setId(new Long(18));
         laloDeviAntyRelative.setPerson(laloDevi);
-        laloDeviAntyRelative.setRelation(aunty);
+        laloDeviAntyRelative.setRelation(RelationUtil.getRelationByName(Relations.AUNTY));
 
         shekhar.addRelative(shekharRelative);
         shekhar.addRelative(anjaliRelative);
@@ -301,32 +216,32 @@ public class DataUtil {
         Relative amritaRelative = new Relative();
         amritaRelative.setId(new Long(19));
         amritaRelative.setPerson(amrita);
-        amritaRelative.setRelation(sister);
+        amritaRelative.setRelation(RelationUtil.getRelationByName(Relations.SISTER));
 
         Relative shwetaRelative = new Relative();
         shwetaRelative.setId(new Long(20));
         shwetaRelative.setPerson(shweta);
-        shwetaRelative.setRelation(sister);
+        shwetaRelative.setRelation(RelationUtil.getRelationByName(Relations.SISTER));
 
         Relative ajitRelative = new Relative();
         ajitRelative.setId(new Long(21));
         ajitRelative.setPerson(ajit);
-        ajitRelative.setRelation(brother);
+        ajitRelative.setRelation(RelationUtil.getRelationByName(Relations.BROTHER));
 
         Relative kshitijRelative = new Relative();
         kshitijRelative.setId(new Long(22));
         kshitijRelative.setPerson(kshitij);
-        kshitijRelative.setRelation(sistersHusband);
+        kshitijRelative.setRelation(RelationUtil.getRelationByName(Relations.SISTERS_HUSBAND));
 
         Relative ashokKumarFatherRelative = new Relative();
         ashokKumarFatherRelative.setId(new Long(23));
         ashokKumarFatherRelative.setPerson(ashokKumar);
-        ashokKumarFatherRelative.setRelation(father);
+        ashokKumarFatherRelative.setRelation(RelationUtil.getRelationByName(Relations.FATHER));
 
         Relative lalmuniDeviMotherRelative = new Relative();
         lalmuniDeviMotherRelative.setId(new Long(24));
         lalmuniDeviMotherRelative.setPerson(lalmuniDevi);
-        lalmuniDeviMotherRelative.setRelation(mother);
+        lalmuniDeviMotherRelative.setRelation(RelationUtil.getRelationByName(Relations.MOTHER));
 
         ranjeet.addRelative(shekharRelative);
         ranjeet.addRelative(ranjeetRelative);
@@ -362,12 +277,27 @@ public class DataUtil {
 
     }
 
-
-    public static Map<Relation, String> getRelations() {
-        return relations;
-    }
-
     public static Map<Long, Person> getPeople() {
         return people;
+    }
+
+
+    public static Person getPersonByName(String personName){
+        Collection<Person> persons = people.values();
+        for(Person person: persons){
+            if(person.getName().equalsIgnoreCase(personName)){
+                return person;
+            }
+        }
+        return null;
+    }
+
+    public static Relative getRelativeByName(String relativeName, Person person){
+        for(Relative relative: person.getRelatives()){
+            if(relative.getPerson().getName().equalsIgnoreCase(relativeName)){
+                return relative;
+            }
+        }
+        return null;
     }
 }

@@ -6,7 +6,7 @@ import com.codeactuator.samriddhi.domain.Person;
 import com.codeactuator.samriddhi.domain.Relation;
 import com.codeactuator.samriddhi.domain.Relative;
 import com.codeactuator.samriddhi.services.RelationService;
-import com.codeactuator.samriddhi.util.DataUtil;
+import com.codeactuator.samriddhi.util.RelationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -143,18 +143,18 @@ public class RelationServiceImpl implements RelationService {
         Relation result = new Relation(x, y, relativeSomeOne.getRelation().getSex(),
                 relativeSomeOne.getRelation().isOwner(), inLaw, isSibling);
 
-        String newRelationName = DataUtil.getRelations().get(result);
+        String newRelationName = RelationUtil.getRelations().get(result);
         result.setName(newRelationName);
 
         //If the resulting relation is not making any sense then
         // change its ownership (switch the Husband/Wife property) and then try to match
-        if (!DataUtil.getRelations().containsKey(result)) {
+        if (!RelationUtil.getRelations().containsKey(result)) {
             result.setOwner(!relativeSomeOne.getRelation().isOwner());
         }
 
-        System.out.println(relativeOne.getPerson().getName() + "\t" + relativeOne.getRelation() + "\t" + DataUtil.getRelations().get(relativeOne.getRelation()));
-        System.out.println(relativeSomeOne.getPerson().getName() + "\t" + relativeSomeOne.getRelation() + "\t" + DataUtil.getRelations().get(relativeSomeOne.getRelation()));
-        System.out.println("RESULT" + "\t" + result + "\t" + DataUtil.getRelations().get(result));
+        System.out.println(relativeOne.getPerson().getName() + "\t" + relativeOne.getRelation() + "\t" + RelationUtil.getRelations().get(relativeOne.getRelation()));
+        System.out.println(relativeSomeOne.getPerson().getName() + "\t" + relativeSomeOne.getRelation() + "\t" + RelationUtil.getRelations().get(relativeSomeOne.getRelation()));
+        System.out.println("RESULT" + "\t" + result + "\t" + RelationUtil.getRelations().get(result));
         System.out.println("=============================================");
 
         return result;
