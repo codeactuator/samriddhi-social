@@ -10,9 +10,9 @@ import java.util.Set;
 
 public class RelationUtil {
 
-    static Map<Relation, String> relations = new HashMap();
+    Map<Relation, String> relations = new HashMap();
 
-    static {
+    public RelationUtil() {
 
         Relation me = new Relation(0, 0, 1, true, false, true, Relations.ME.getRelation());
 
@@ -90,12 +90,12 @@ public class RelationUtil {
         relations.put(daughter, daughter.getName());
     }
 
-    public static Map<Relation, String> getRelations() {
+    public Map<Relation, String> getRelations() {
         return relations;
     }
 
-    public static Relation getRelationByName(Relations relationEnum){
-        Set<Relation> relations = RelationUtil.relations.keySet();
+    public Relation getRelationByName(Relations relationEnum){
+        Set<Relation> relations = this.relations.keySet();
         for(Relation relation: relations){
             if(relation.getName().equalsIgnoreCase(relationEnum.getRelation())){
                 return relation;

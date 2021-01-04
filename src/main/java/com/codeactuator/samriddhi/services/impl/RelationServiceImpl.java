@@ -93,7 +93,7 @@ public class RelationServiceImpl implements RelationService {
         //Sequence 2.
         //If PersonOne trying to find relation with some other person and that other person is
         //already in PersonOne relatives list then we will get the relationship from his list.
-        if(relativeOne != null && isExistingRelative(relativeSomeOne.getPerson().getId(), relativeOne.getPerson())){
+        if((relativeOne != null && relativeSomeOne != null) && isExistingRelative(relativeSomeOne.getPerson().getId(), relativeOne.getPerson())){
             return findRelativeByPersonId(relativeSomeOne.getPerson().getId(), relativeOne.getPerson()).get().getRelation();
         } else {
             //More Sequence inside this method.
@@ -141,20 +141,22 @@ public class RelationServiceImpl implements RelationService {
         boolean isSibling = isSibling(relativeOne, relativeSomeOne, relativeLinked);
 
         Relation result = new Relation(x, y, relativeSomeOne.getRelation().getSex(),
-                relativeSomeOne.getRelation().isOwner(), inLaw, isSibling);
+                false, inLaw, isSibling);
+        result.setOwner(relativeSomeOne.getRelation().isOwner());
 
-        String newRelationName = RelationUtil.getRelations().get(result);
+        RelationUtil relationUtil = new RelationUtil();
+        String newRelationName = relationUtil.getRelations().get(result);
         result.setName(newRelationName);
 
         //If the resulting relation is not making any sense then
         // change its ownership (switch the Husband/Wife property) and then try to match
-        if (!RelationUtil.getRelations().containsKey(result)) {
+        if (!relationUtil.getRelations().containsKey(result)) {
             result.setOwner(!relativeSomeOne.getRelation().isOwner());
         }
 
-        System.out.println(relativeOne.getPerson().getName() + "\t" + relativeOne.getRelation() + "\t" + RelationUtil.getRelations().get(relativeOne.getRelation()));
-        System.out.println(relativeSomeOne.getPerson().getName() + "\t" + relativeSomeOne.getRelation() + "\t" + RelationUtil.getRelations().get(relativeSomeOne.getRelation()));
-        System.out.println("RESULT" + "\t" + result + "\t" + RelationUtil.getRelations().get(result));
+        System.out.println(relativeOne.getPerson().getName() + "\t" + relativeOne.getRelation() + "\t" + relationUtil.getRelations().get(relativeOne.getRelation()));
+        System.out.println(relativeSomeOne.getPerson().getName() + "\t" + relativeSomeOne.getRelation() + "\t" + relationUtil.getRelations().get(relativeSomeOne.getRelation()));
+        System.out.println("RESULT" + "\t" + result + "\t" + relationUtil.getRelations().get(result));
         System.out.println("=============================================");
 
         return result;
@@ -172,9 +174,11 @@ public class RelationServiceImpl implements RelationService {
     }
 
     public boolean isExistingRelative(Long personId, Person person){
-        for (Relative relative: person.getRelatives()){
-            if(relative.getPerson().getId() == personId){
-                return true;
+        if(person.getRelatives() != null) {
+            for (Relative relative : person.getRelatives()) {
+                if (relative.getPerson().getId() == personId) {
+                    return true;
+                }
             }
         }
         return false;
