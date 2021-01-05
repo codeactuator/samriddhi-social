@@ -47,7 +47,6 @@ public class RelationUtil {
         Relation brotherInLawNonSibling = new Relation(1, 0, 1, true, true, false, Relations.BROTHER_IN_LAW_NON_SIBLING.getRelation());
         Relation sisterInLawNonSibling = new Relation(1, 0, 0, true, true, false, Relations.SISTER_IN_LAW_NON_SIBLING.getRelation());
 
-
         Relation son = new Relation(0, -1, 1, true, false, true, Relations.SON.getRelation());
         Relation daughter = new Relation(0, -1, 0, true, false, true, Relations.DOUGHTER.getRelation());
 

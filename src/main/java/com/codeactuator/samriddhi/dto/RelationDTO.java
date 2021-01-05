@@ -1,17 +1,12 @@
-package com.codeactuator.samriddhi.domain;
+package com.codeactuator.samriddhi.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.codeactuator.samriddhi.domain.Relation;
+
 import java.util.Objects;
 
-@Entity
-@XmlRootElement
-public class Relation {
+public class RelationDTO implements Marshallable<Relation, RelationDTO> {
 
-    @Id
-    @GeneratedValue
+
     int id;
     int x;
     int y;
@@ -30,11 +25,9 @@ public class Relation {
     boolean isSibling;
     private String name;
 
-    public Relation(){
+    public RelationDTO(){}
 
-    }
-
-    public Relation(int x, int y, int sex, boolean isOwner, boolean isInlaw, boolean isSibling){
+    public RelationDTO(int x, int y, int sex, boolean isOwner, boolean isInlaw, boolean isSibling){
         this.x = x;
         this.y = y;
         this.sex = sex;
@@ -43,9 +36,36 @@ public class Relation {
         this.isSibling = isSibling;
     }
 
-    public Relation(int x, int y, int sex, boolean isOwner, boolean isInlaw, boolean isSibling, String name){
+    public RelationDTO(int x, int y, int sex, boolean isOwner, boolean isInlaw, boolean isSibling, String name){
         this(x, y, sex, isOwner, isInlaw, isSibling);
         this.name = name;
+    }
+
+
+    @Override
+    public Relation marshall() {
+        Relation relation = new Relation();
+        relation.setId(this.getId());
+        relation.setName(this.getName());
+        relation.setX(this.getX());
+        relation.setY(this.getY());
+        relation.setSibling(this.isSibling());
+        relation.setOwner(this.isOwner());
+        relation.setInlaw(this.isInlaw());
+        relation.setSex(this.getSex());
+        return relation;
+    }
+
+    @Override
+    public void unmarshall(Relation relation) {
+        this.setId(relation.getId());
+        this.setName(relation.getName());
+        this.setX(relation.getX());
+        this.setY(relation.getY());
+        this.setSibling(relation.isSibling());
+        this.setOwner(relation.isOwner());
+        this.setInlaw(relation.isInlaw());
+        this.setSex(relation.getSex());
     }
 
     public int getId() {
@@ -116,24 +136,25 @@ public class Relation {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Relation relation = (Relation) o;
-        return x == relation.x &&
-                y == relation.y &&
-                sex == relation.sex &&
-                isOwner == relation.isOwner &&
-                isInlaw == relation.isInlaw &&
-                isSibling == relation.isSibling;
+        RelationDTO that = (RelationDTO) o;
+        return id == that.id &&
+                x == that.x &&
+                y == that.y &&
+                sex == that.sex &&
+                isOwner == that.isOwner &&
+                isInlaw == that.isInlaw &&
+                isSibling == that.isSibling;
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(x, y, sex, isOwner, isInlaw, isSibling);
+        return Objects.hash(id, x, y, sex, isOwner, isInlaw, isSibling);
     }
 
     @Override
     public String toString() {
-        return "Relation{" +
+        return "RelationDTO{" +
                 "id=" + id +
                 ", x=" + x +
                 ", y=" + y +
