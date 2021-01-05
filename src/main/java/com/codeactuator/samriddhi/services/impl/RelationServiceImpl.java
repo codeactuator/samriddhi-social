@@ -60,4 +60,11 @@ public class RelationServiceImpl implements RelationService {
         });
         return Optional.of(relationDTO);
     }
+
+    @Override
+    public Optional<List<RelationDTO>> deleteAll() {
+        Optional<List<RelationDTO>> all = findAll();
+        relationRepository.deleteAll();
+        return all;
+    }
 }

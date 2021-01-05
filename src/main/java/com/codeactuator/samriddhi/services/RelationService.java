@@ -13,4 +13,5 @@ public interface RelationService {
     public Optional<List<RelationDTO>> saveAll(List<RelationDTO> relationDTOS);
     public Optional<List<RelationDTO>> findAll();
     public Optional<RelationDTO> findById(Long id);
+    public Optional<List<RelationDTO>> deleteAll();
 }
