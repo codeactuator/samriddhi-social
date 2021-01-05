@@ -1,7 +1,9 @@
 package com.codeactuator.samriddhi.controller;
 
+
 import com.codeactuator.samriddhi.dto.PersonDTO;
-import com.codeactuator.samriddhi.services.PersonService;
+import com.codeactuator.samriddhi.dto.RelationDTO;
+import com.codeactuator.samriddhi.services.RelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +14,11 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/persons")
-public class PersonController {
+@RequestMapping("/v1/relations")
+public class RelationController {
 
     @Autowired
-    private PersonService personService;
+    private RelationService relationService;
 
     @GetMapping("/ping")
     public String ping(){
@@ -27,17 +29,20 @@ public class PersonController {
 
 
     @GetMapping
-    public List<PersonDTO> findAll(){
-        return personService.findAll().get();
+    public List<RelationDTO> findAll(){
+        return relationService.findAll().get();
     }
+
 
     @GetMapping("/{id}")
-    public PersonDTO findById(@PathVariable(value = "id") Long id){
-        return personService.findById(id).get();
+    public RelationDTO findById(@PathVariable(value = "id") Long id){
+        return relationService.findById(id).get();
     }
 
+
     @PostMapping
-    public PersonDTO create(@RequestBody PersonDTO personDTO){
-        return personService.save(personDTO).get();
+    public RelationDTO create(@RequestBody RelationDTO relationDTO){
+        return relationService.save(relationDTO).get();
     }
+
 }
