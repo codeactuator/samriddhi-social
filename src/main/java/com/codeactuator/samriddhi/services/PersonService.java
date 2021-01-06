@@ -10,6 +10,9 @@ import java.util.Optional;
 public interface PersonService {
 
     public Optional<PersonDTO> save(PersonDTO personDTO);
+    public Optional<List<PersonDTO>> saveAll(List<PersonDTO> personDTOS);
+    public Optional<List<PersonDTO>> deleteAll();
     public Optional<List<PersonDTO>> findAll();
     public Optional<PersonDTO> findById(Long id);
+    public Optional<PersonDTO> findByName(String name);
 }

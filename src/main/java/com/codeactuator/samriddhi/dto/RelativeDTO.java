@@ -4,8 +4,10 @@ import com.codeactuator.samriddhi.domain.Person;
 import com.codeactuator.samriddhi.domain.Relation;
 import com.codeactuator.samriddhi.domain.Relative;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
+@XmlRootElement
 public class RelativeDTO implements Marshallable<Relative, RelativeDTO> {
 
 
@@ -29,7 +31,7 @@ public class RelativeDTO implements Marshallable<Relative, RelativeDTO> {
 
         relative.setId(this.getId());
         relative.setPerson(person);
-
+        relative.setRelation(relation);
         return relative;
     }
 

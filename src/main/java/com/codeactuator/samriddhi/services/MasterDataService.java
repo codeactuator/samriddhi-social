@@ -11,5 +11,9 @@ public interface MasterDataService {
 
     public List<RelationDTO> createRelations();
     public List<PersonDTO> createPersons();
-    public List<RelativeDTO> createRelative();
+    public List<RelativeDTO> createRelatives();
+
+    public void deleteRelations();
+    public void deletePersons();
+    public void deleteRelatives();
 }

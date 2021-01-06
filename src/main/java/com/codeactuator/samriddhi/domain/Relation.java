@@ -3,12 +3,11 @@ package com.codeactuator.samriddhi.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@XmlRootElement
-public class Relation {
+public class Relation implements Serializable {
 
     @Id
     @GeneratedValue

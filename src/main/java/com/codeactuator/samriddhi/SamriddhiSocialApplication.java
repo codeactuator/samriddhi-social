@@ -19,8 +19,22 @@ public class SamriddhiSocialApplication implements CommandLineRunner {
 	private void init(){
 		System.out.println("DataInit: " + dataInit);
 		if(dataInit){
+			System.out.println("Cleaning database...");
+			masterDataService.deleteRelatives();
+			masterDataService.deletePersons();
+			masterDataService.deleteRelations();
+			System.out.println("Done!");
+
 			System.out.println("Initializing Relations...");
 			masterDataService.createRelations();
+
+			System.out.println("Initializing Persons...");
+			masterDataService.createPersons();
+
+			System.out.println("Initializing Relatives...");
+			//masterDataService.createRelatives();
+			System.out.println("Initialization Done!");
+
 		}
 	}
 

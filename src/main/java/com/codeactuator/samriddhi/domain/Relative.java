@@ -1,13 +1,11 @@
 package com.codeactuator.samriddhi.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Relative {
+public class Relative implements Serializable {
 
     @Id
     @GeneratedValue

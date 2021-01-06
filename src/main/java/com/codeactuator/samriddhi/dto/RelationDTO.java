@@ -2,8 +2,10 @@ package com.codeactuator.samriddhi.dto;
 
 import com.codeactuator.samriddhi.domain.Relation;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
+@XmlRootElement
 public class RelationDTO implements Marshallable<Relation, RelationDTO> {
 
 

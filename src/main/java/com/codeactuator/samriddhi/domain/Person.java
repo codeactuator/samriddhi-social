@@ -4,20 +4,17 @@
  */
 package com.codeactuator.samriddhi.domain;
 
-import com.codeactuator.samriddhi.App;
-
-import java.io.Serializable;
-import java.util.*;
-
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * 
  * @author Ramesh
  */
 @Entity
-@XmlRootElement
 public class Person implements Serializable {
 
     /**
@@ -30,6 +27,12 @@ public class Person implements Serializable {
     private String name;
     @OneToMany
     private List<Relative> relatives;
+
+    public Person(){}
+
+    public Person(String name){
+        this.name = name;
+    }
 
     public void addRelative(Relative relative){
         if(relatives != null && !relatives.contains(relative)){

@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface RelativeService {
 
     public Optional<RelativeDTO> save(RelativeDTO relativeDTO);
+    public Optional<List<RelativeDTO>> saveAll(List<RelativeDTO> relativeDTOS);
     public Optional<List<RelativeDTO>> findAll();
     public Optional<RelativeDTO> findById(Long id);
+    public Optional<List<RelativeDTO>> deleteAll();
 }
