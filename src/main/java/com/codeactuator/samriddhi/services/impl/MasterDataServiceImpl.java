@@ -73,6 +73,8 @@ public class MasterDataServiceImpl implements MasterDataService {
         );
 
 
+        //clean
+        relationRepository.deleteAll();
         Iterable<Relation> relationList = relationRepository.saveAll(relations);
         List<RelationDTO> relationDTOS = new ArrayList<>();
         relationList.forEach(relation -> {
@@ -111,6 +113,9 @@ public class MasterDataServiceImpl implements MasterDataService {
             new Person("KSHITIJ")
         );
 
+        //clean
+        personRepository.deleteAll();
+
         Iterable<Person> personList = personRepository.saveAll(persons);
         List<PersonDTO> personDTOS = new ArrayList<>();
         personList.forEach(person -> {
@@ -146,7 +151,6 @@ public class MasterDataServiceImpl implements MasterDataService {
         ushaDeviRelative.setPerson(personRepository.findByName("USHA DEVI"));
         ushaDeviRelative.setRelation(relationRepository.findByName(Relations.MOTHER.getRelation()));
         relativeRepository.save(ushaDeviRelative);
-
 
         Relative rameshRelative = new Relative();
         rameshRelative.setPerson(personRepository.findByName("RAMESH"));
@@ -256,12 +260,15 @@ public class MasterDataServiceImpl implements MasterDataService {
         relativeRepository.save(ajitRelative);
 
         Person shekhar = personRepository.findByName("SHEKHAR");
+        if(shekhar.getRelatives() != null){
+            shekhar.getRelatives().clear();
+        }
         shekhar.addRelative(shekharRelative);
         shekhar.addRelative(anjaliRelative);
         shekhar.addRelative(opGuptaRelative);
         shekhar.addRelative(ushaDeviRelative);
         shekhar.addRelative(rameshRelative);
-        shekhar.addRelative(shekharRelative);
+        shekhar.addRelative(shravanRelative);
         shekhar.addRelative(sujeetRelative);
         shekhar.addRelative(chhotiRelative);
         shekhar.addRelative(praveenKumarRelative);
@@ -271,6 +278,7 @@ public class MasterDataServiceImpl implements MasterDataService {
         shekhar.addRelative(ranjeetRelative);
         personRepository.save(shekhar);
 
+        /*
         Person ranjeet = personRepository.findByName("RANJEET");
         ranjeet.addRelative(ashokKumarRelative);
         ranjeet.addRelative(lalmuniDeviRelative);
@@ -287,6 +295,7 @@ public class MasterDataServiceImpl implements MasterDataService {
         sanjeet.addRelative(shekharRelative);
         sanjeet.addRelative(ranjeetRelative);
         personRepository.save(sanjeet);
+        */
 
         return relativeDTOS;
     }

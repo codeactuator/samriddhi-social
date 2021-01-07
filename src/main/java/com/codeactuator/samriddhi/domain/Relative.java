@@ -10,9 +10,9 @@ public class Relative implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToOne
+    @ManyToOne
     private Person person;
-    @OneToOne
+    @ManyToOne
     private Relation relation;
 
     public Long getId() {

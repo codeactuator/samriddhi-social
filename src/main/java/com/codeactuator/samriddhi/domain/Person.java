@@ -25,7 +25,8 @@ public class Person implements Serializable {
     @GeneratedValue
     private long id;
     private String name;
-    @OneToMany
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Relative> relatives;
 
     public Person(){}

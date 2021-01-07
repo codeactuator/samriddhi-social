@@ -20,9 +20,10 @@ public class SamriddhiSocialApplication implements CommandLineRunner {
 		System.out.println("DataInit: " + dataInit);
 		if(dataInit){
 			System.out.println("Cleaning database...");
-			masterDataService.deleteRelatives();
-			masterDataService.deletePersons();
-			masterDataService.deleteRelations();
+			//masterDataService.deletePersons();
+			//masterDataService.deleteRelations();
+			//masterDataService.deleteRelatives();
+
 			System.out.println("Done!");
 
 			System.out.println("Initializing Relations...");
@@ -32,7 +33,7 @@ public class SamriddhiSocialApplication implements CommandLineRunner {
 			masterDataService.createPersons();
 
 			System.out.println("Initializing Relatives...");
-			//masterDataService.createRelatives();
+			masterDataService.createRelatives();
 			System.out.println("Initialization Done!");
 
 		}
