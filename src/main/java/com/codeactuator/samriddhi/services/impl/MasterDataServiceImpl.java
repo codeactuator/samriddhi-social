@@ -263,7 +263,7 @@ public class MasterDataServiceImpl implements MasterDataService {
         if(shekhar.getRelatives() != null){
             shekhar.getRelatives().clear();
         }
-        shekhar.addRelative(shekharRelative);
+        //shekhar.addRelative(shekharRelative);
         shekhar.addRelative(anjaliRelative);
         shekhar.addRelative(opGuptaRelative);
         shekhar.addRelative(ushaDeviRelative);

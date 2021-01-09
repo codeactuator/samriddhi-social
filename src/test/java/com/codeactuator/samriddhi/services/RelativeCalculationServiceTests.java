@@ -4,15 +4,15 @@ import com.codeactuator.samriddhi.constants.Relations;
 import com.codeactuator.samriddhi.domain.Person;
 import com.codeactuator.samriddhi.domain.Relation;
 import com.codeactuator.samriddhi.domain.Relative;
-import com.codeactuator.samriddhi.services.impl.RelationCalculationServiceImpl;
+import com.codeactuator.samriddhi.services.impl.RelativeCalculationServiceImpl;
 import com.codeactuator.samriddhi.util.RelationUtil;
 import com.codeactuator.samriddhi.util.TestData;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RelationCalculationServiceTests {
+public class RelativeCalculationServiceTests {
 
-    private RelationCalculationService relationCalculationService;
+    private RelativeCalculationService relativeCalculationService;
     private TestData testData;
     private RelationUtil relationUtil;
 
@@ -20,7 +20,7 @@ public class RelationCalculationServiceTests {
     public void init(){
         testData = new TestData();
         relationUtil = new RelationUtil();
-        relationCalculationService = new RelationCalculationServiceImpl();
+        relativeCalculationService = new RelativeCalculationServiceImpl();
         assert (testData.getPeople() != null);
 
     }
@@ -45,7 +45,7 @@ public class RelationCalculationServiceTests {
         Relative opGupta = testData.getRelativeByName("OP GUPTA", shekharPerson);
 
 
-        Relation relation = relationCalculationService.find(shekhar, opGupta, shekhar);
+        Relation relation = relativeCalculationService.find(shekhar, opGupta, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.FATHER.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == true);
@@ -64,7 +64,7 @@ public class RelationCalculationServiceTests {
         Relative shekhar = testData.getRelativeByName("SHEKHAR", shekharPerson);
         Relative ushaDevi = testData.getRelativeByName("USHA DEVI", shekharPerson);
 
-        Relation relation = relationCalculationService.find(shekhar, ushaDevi, shekhar);
+        Relation relation = relativeCalculationService.find(shekhar, ushaDevi, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.MOTHER.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == true);
@@ -82,7 +82,7 @@ public class RelationCalculationServiceTests {
         Relative shekhar = testData.getRelativeByName("SHEKHAR", shekharPerson);
         Relative shravan = testData.getRelativeByName("SHRAVAN", shekharPerson);
 
-        Relation relation = relationCalculationService.find(shekhar, shravan, shekhar);
+        Relation relation = relativeCalculationService.find(shekhar, shravan, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.BROTHER.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == true);
@@ -101,7 +101,7 @@ public class RelationCalculationServiceTests {
         Relative chhoti = testData.getRelativeByName("CHHOTI", shekharPerson);
 
 
-        Relation relation = relationCalculationService.find(shekhar, chhoti, shekhar);
+        Relation relation = relativeCalculationService.find(shekhar, chhoti, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.SISTER.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == true);
@@ -132,7 +132,7 @@ public class RelationCalculationServiceTests {
         Relative shravan = testData.getRelativeByName("SHRAVAN", shekharPerson);
         Relative opGupta = testData.getRelativeByName("OP GUPTA", shekharPerson);
 
-        Relation relation = relationCalculationService.find(shravan, opGupta, shekhar);
+        Relation relation = relativeCalculationService.find(shravan, opGupta, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.FATHER.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == true);
@@ -151,7 +151,7 @@ public class RelationCalculationServiceTests {
         Relative shravan = testData.getRelativeByName("SHRAVAN", shekharPerson);
         Relative ushaDevi = testData.getRelativeByName("USHA DEVI", shekharPerson);
 
-        Relation relation = relationCalculationService.find(shravan, ushaDevi, shekhar);
+        Relation relation = relativeCalculationService.find(shravan, ushaDevi, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.MOTHER.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == true);
@@ -169,7 +169,7 @@ public class RelationCalculationServiceTests {
         Relative shekhar = testData.getRelativeByName("SHEKHAR", shekharPerson);
         Relative ashokKumar = testData.getRelativeByName("ASHOK KUMAR", shekharPerson);
 
-        Relation relation = relationCalculationService.find(shekhar, ashokKumar, shekhar);
+        Relation relation = relativeCalculationService.find(shekhar, ashokKumar, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.UNCLE.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == false);
@@ -186,7 +186,7 @@ public class RelationCalculationServiceTests {
         Relative shekhar = testData.getRelativeByName("SHEKHAR", shekharPerson);
         Relative lalmuniDevi = testData.getRelativeByName("LALMUNI DEVI", shekharPerson);
 
-        Relation relation = relationCalculationService.find(shekhar, lalmuniDevi, shekhar);
+        Relation relation = relativeCalculationService.find(shekhar, lalmuniDevi, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.AUNTY.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == false);
@@ -205,7 +205,7 @@ public class RelationCalculationServiceTests {
         Relative ranjeet = testData.getRelativeByName("RANJEET", shekharPerson);
         Relative ashokKumar = testData.getRelativeByName("ASHOK KUMAR", ranjeet.getPerson());
 
-        Relation relation = relationCalculationService.find(shekhar, ashokKumar, ranjeet);
+        Relation relation = relativeCalculationService.find(shekhar, ashokKumar, ranjeet);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.UNCLE.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == false);
@@ -223,7 +223,7 @@ public class RelationCalculationServiceTests {
         Relative ranjeet = testData.getRelativeByName("RANJEET", shekharPerson);
         Relative lalmuniDevi = testData.getRelativeByName("LALMUNI DEVI", ranjeet.getPerson());
 
-        Relation relation = relationCalculationService.find(shekhar, lalmuniDevi, ranjeet);
+        Relation relation = relativeCalculationService.find(shekhar, lalmuniDevi, ranjeet);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.AUNTY.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == false);
@@ -241,7 +241,7 @@ public class RelationCalculationServiceTests {
         Relative ranjeet = testData.getRelativeByName("RANJEET", shekharPerson);
         Relative opGupta = testData.getRelativeByName("OP GUPTA", shekharPerson);
 
-        Relation relation = relationCalculationService.find(ranjeet, opGupta, shekhar);
+        Relation relation = relativeCalculationService.find(ranjeet, opGupta, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.UNCLE.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == false);
@@ -259,7 +259,7 @@ public class RelationCalculationServiceTests {
         Relative ranjeet = testData.getRelativeByName("RANJEET", shekharPerson);
         Relative ushaDevi = testData.getRelativeByName("USHA DEVI", shekharPerson);
 
-        Relation relation = relationCalculationService.find(ranjeet, ushaDevi, shekhar);
+        Relation relation = relativeCalculationService.find(ranjeet, ushaDevi, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.AUNTY.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == false);
@@ -284,7 +284,7 @@ public class RelationCalculationServiceTests {
         Relative shravan = testData.getRelativeByName("SHRAVAN", shekharPerson);
         Relative sujeet = testData.getRelativeByName("SUJEET", shekharPerson);
 
-        Relation relation = relationCalculationService.find(sujeet, shravan, shekhar);
+        Relation relation = relativeCalculationService.find(sujeet, shravan, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.BROTHER.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == true);
@@ -303,7 +303,7 @@ public class RelationCalculationServiceTests {
         Relative chhoti = testData.getRelativeByName("CHHOTI", shekharPerson);
         Relative sujeet = testData.getRelativeByName("SUJEET", shekharPerson);
 
-        Relation relation = relationCalculationService.find(sujeet, chhoti, shekhar);
+        Relation relation = relativeCalculationService.find(sujeet, chhoti, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.SISTER.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == true);
@@ -329,12 +329,12 @@ public class RelationCalculationServiceTests {
         Relative shekhar = testData.getRelativeByName("SHEKHAR", shekharPerson);
         Relative ranjeet = testData.getRelativeByName("RANJEET", shekharPerson);
 
-        Relation shekharAsRanjeetNonSiblingBrother = relationCalculationService.find(shekhar, ranjeet, shekhar);
+        Relation shekharAsRanjeetNonSiblingBrother = relativeCalculationService.find(shekhar, ranjeet, shekhar);
         shekhar.setRelation(shekharAsRanjeetNonSiblingBrother);
 
         Relative amrita = testData.getRelativeByName("AMRITA", ranjeet.getPerson());
 
-        Relation relation = relationCalculationService.find(shekhar, amrita, ranjeet);
+        Relation relation = relativeCalculationService.find(shekhar, amrita, ranjeet);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.SISTER_NON_SIBLING.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == false);
@@ -353,7 +353,7 @@ public class RelationCalculationServiceTests {
         Relative sanjeet = testData.getRelativeByName("SANJEET", shekharPerson);
 
 
-        Relation relation = relationCalculationService.find(shekhar, sanjeet, shekhar);
+        Relation relation = relativeCalculationService.find(shekhar, sanjeet, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.BROTHER_NON_SIBLING.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == false);
@@ -372,7 +372,7 @@ public class RelationCalculationServiceTests {
         Relative shravan = testData.getRelativeByName("SHRAVAN", shekharPerson);
         Relative ranjeet = testData.getRelativeByName("RANJEET", shekharPerson);
 
-        Relation relation = relationCalculationService.find(shravan, ranjeet, shekhar);
+        Relation relation = relativeCalculationService.find(shravan, ranjeet, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.BROTHER_NON_SIBLING.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == false);
@@ -395,7 +395,7 @@ public class RelationCalculationServiceTests {
         Relative shravan = testData.getRelativeByName("SHRAVAN", shekharPerson);
         shravan.getRelation().setSibling(ranjeet.getRelation().isSibling());
 
-        Relation relation = relationCalculationService.find(shravan, amrita, ranjeet);
+        Relation relation = relativeCalculationService.find(shravan, amrita, ranjeet);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.SISTER_NON_SIBLING.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == false);
@@ -420,7 +420,7 @@ public class RelationCalculationServiceTests {
         Relative sanjeet = testData.getRelativeByName("SANJEET", shekharPerson);
         Relative ranjeet = testData.getRelativeByName("RANJEET", shekharPerson);
 
-        Relation relation = relationCalculationService.find(ranjeet, sanjeet, shekhar);
+        Relation relation = relativeCalculationService.find(ranjeet, sanjeet, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.BROTHER_NON_SIBLING.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == false);
@@ -445,7 +445,7 @@ public class RelationCalculationServiceTests {
         Relative ajit = testData.getRelativeByName("AJIT", ranjeet.getPerson());
 
 
-        Relation relation = relationCalculationService.find(ranjeet, ajit, shekhar);
+        Relation relation = relativeCalculationService.find(ranjeet, ajit, shekhar);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.BROTHER.getRelation()));
         assert (relation.isInlaw() == false);
         assert (relation.isSibling() == true);
@@ -473,7 +473,7 @@ public class RelationCalculationServiceTests {
         Relative anjali = testData.getRelativeByName("ANJALI", shekharPerson);
 
 
-        Relation relation = relationCalculationService.find(shekhar, anjali, shekhar);
+        Relation relation = relativeCalculationService.find(shekhar, anjali, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.WIFE.getRelation()));
         assert (relation.isInlaw() == true);
@@ -493,7 +493,7 @@ public class RelationCalculationServiceTests {
         Relative anjali = testData.getRelativeByName("ANJALI", shekharPerson);
         Relative sujeet = testData.getRelativeByName("SUJEET", shekharPerson);
 
-        Relation relation = relationCalculationService.find(sujeet, anjali, shekhar);
+        Relation relation = relativeCalculationService.find(sujeet, anjali, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.BROTHERS_WIFE.getRelation()));
         assert (relation.isInlaw() == true);
@@ -513,7 +513,7 @@ public class RelationCalculationServiceTests {
         Relative anjali = testData.getRelativeByName("ANJALI", shekharPerson);
         Relative ranjeet = testData.getRelativeByName("RANJEET", shekharPerson);
 
-        Relation relation = relationCalculationService.find(ranjeet, anjali, shekhar);
+        Relation relation = relativeCalculationService.find(ranjeet, anjali, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.BROTHERS_WIFE_NON_SIBLING.getRelation()));
         assert (relation.isInlaw() == true);
@@ -533,7 +533,7 @@ public class RelationCalculationServiceTests {
         Relative praveenKumar = testData.getRelativeByName("PRAVEEN KUMAR", shekharPerson);
 
 
-        Relation relation = relationCalculationService.find(shekhar, praveenKumar, shekhar);
+        Relation relation = relativeCalculationService.find(shekhar, praveenKumar, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.FATHER_IN_LAW.getRelation()));
         assert (relation.isInlaw() == true);
@@ -552,7 +552,7 @@ public class RelationCalculationServiceTests {
         Relative nilamDevi = testData.getRelativeByName("NILAM DEVI", shekharPerson);
 
 
-        Relation relation = relationCalculationService.find(shekhar, nilamDevi, shekhar);
+        Relation relation = relativeCalculationService.find(shekhar, nilamDevi, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.MOTHER_IN_LAW.getRelation()));
         assert (relation.isInlaw() == true);
@@ -571,7 +571,7 @@ public class RelationCalculationServiceTests {
         Relative nilamDevi = testData.getRelativeByName("NILAM DEVI", shekharPerson);
         Relative shravan = testData.getRelativeByName("SHRAVAN", shekharPerson);
 
-        Relation relation = relationCalculationService.find(shravan, nilamDevi, shekhar);
+        Relation relation = relativeCalculationService.find(shravan, nilamDevi, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.MOTHER_IN_LAW.getRelation()));
         assert (relation.isInlaw() == true);
@@ -590,7 +590,7 @@ public class RelationCalculationServiceTests {
         Relative sanjeet = testData.getRelativeByName("SANJEET", shekharPerson);
         Relative nilamDevi = testData.getRelativeByName("NILAM DEVI", shekharPerson);
 
-        Relation relation = relationCalculationService.find(sanjeet, nilamDevi, shekhar);
+        Relation relation = relativeCalculationService.find(sanjeet, nilamDevi, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.MOTHER_IN_LAW_NON_SIBLING.getRelation()));
         assert (relation.isInlaw() == true);
@@ -610,7 +610,7 @@ public class RelationCalculationServiceTests {
         Relative sanjeet = testData.getRelativeByName("SANJEET", shekharPerson);
         Relative praveenKumar = testData.getRelativeByName("PRAVEEN KUMAR", shekharPerson);
 
-        Relation relation = relationCalculationService.find(sanjeet, praveenKumar, shekhar);
+        Relation relation = relativeCalculationService.find(sanjeet, praveenKumar, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.FATHER_IN_LAW_NON_SIBLING.getRelation()));
         assert (relation.isInlaw() == true);
@@ -628,7 +628,7 @@ public class RelationCalculationServiceTests {
         Relative shekhar = testData.getRelativeByName("SHEKHAR", shekharPerson);
         Relative rohit = testData.getRelativeByName("ROHIT", shekharPerson);
 
-        Relation relation = relationCalculationService.find(shekhar, rohit, shekhar);
+        Relation relation = relativeCalculationService.find(shekhar, rohit, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.BROTHER_IN_LAW.getRelation()));
         assert (relation.isInlaw() == true);
@@ -646,7 +646,7 @@ public class RelationCalculationServiceTests {
         Relative shekhar = testData.getRelativeByName("SHEKHAR", shekharPerson);
         Relative neha = testData.getRelativeByName("NEHA", shekharPerson);
 
-        Relation relation = relationCalculationService.find(shekhar, neha, shekhar);
+        Relation relation = relativeCalculationService.find(shekhar, neha, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.SISTER_IN_LAW.getRelation()));
         assert (relation.isInlaw() == true);
@@ -666,7 +666,7 @@ public class RelationCalculationServiceTests {
         Relative shravan = testData.getRelativeByName("SHRAVAN", shekharPerson);
         Relative neha = testData.getRelativeByName("NEHA", shekharPerson);
 
-        Relation relation = relationCalculationService.find(shravan, neha, shekhar);
+        Relation relation = relativeCalculationService.find(shravan, neha, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.SISTER_IN_LAW.getRelation()));
         assert (relation.isInlaw() == true);
@@ -686,7 +686,7 @@ public class RelationCalculationServiceTests {
         Relative sanjeet = testData.getRelativeByName("SANJEET", shekharPerson);
         Relative neha = testData.getRelativeByName("NEHA", shekharPerson);
 
-        Relation relation = relationCalculationService.find(sanjeet, neha, shekhar);
+        Relation relation = relativeCalculationService.find(sanjeet, neha, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.SISTER_IN_LAW_NON_SIBLING.getRelation()));
         assert (relation.isInlaw() == true);
@@ -706,7 +706,7 @@ public class RelationCalculationServiceTests {
         Relative sanjeet = testData.getRelativeByName("SANJEET", shekharPerson);
         Relative rohit = testData.getRelativeByName("ROHIT", shekharPerson);
 
-        Relation relation = relationCalculationService.find(sanjeet, rohit, shekhar);
+        Relation relation = relativeCalculationService.find(sanjeet, rohit, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.BROTHER_IN_LAW_NON_SIBLING.getRelation()));
         assert (relation.isInlaw() == true);
@@ -727,7 +727,7 @@ public class RelationCalculationServiceTests {
         Relative shravan = testData.getRelativeByName("SHRAVAN", shekharPerson);
         Relative neha = testData.getRelativeByName("NEHA", shekharPerson);
 
-        Relation relation = relationCalculationService.find(neha, shravan, shekhar);
+        Relation relation = relativeCalculationService.find(neha, shravan, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.BROTHER_IN_LAW.getRelation()));
         assert (relation.isInlaw() == true);
@@ -747,7 +747,7 @@ public class RelationCalculationServiceTests {
         Relative sanjeet = testData.getRelativeByName("SANJEET", shekharPerson);
         Relative neha = testData.getRelativeByName("NEHA", shekharPerson);
 
-        Relation relation = relationCalculationService.find(neha, sanjeet, shekhar);
+        Relation relation = relativeCalculationService.find(neha, sanjeet, shekhar);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.BROTHER_IN_LAW_NON_SIBLING.getRelation()));
         assert (relation.isInlaw() == true);
@@ -767,7 +767,7 @@ public class RelationCalculationServiceTests {
         Relative kshitij = testData.getRelativeByName("KSHITIJ", ranjeet.getPerson());
         shekhar.getRelation().setSibling(ranjeet.getRelation().isSibling());
 
-        Relation relation = relationCalculationService.find(shekhar, kshitij, ranjeet);
+        Relation relation = relativeCalculationService.find(shekhar, kshitij, ranjeet);
         System.out.println(relation);
         assert (relationUtil.getRelations().get(relation).equalsIgnoreCase(Relations.SISTERS_HUSBAND_NON_SIBLING.getRelation()));
         assert (relation.isInlaw() == true);
