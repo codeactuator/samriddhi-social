@@ -37,12 +37,6 @@ public class PersonDTO implements Marshallable<Person, PersonDTO>{
         person.setId(this.getId());
         person.setName(this.getName());
 
-        List<Relative> relatives = this.relatives.stream()
-                .map(relativeDTO -> {
-                    return relativeDTO.marshall();
-                })
-                .collect(Collectors.toList());
-        person.setRelatives(relatives);
         return person;
     }
 

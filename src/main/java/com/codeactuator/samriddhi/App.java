@@ -1,18 +1,26 @@
 package com.codeactuator.samriddhi;
 
+import com.codeactuator.samriddhi.domain.Relation;
 import com.codeactuator.samriddhi.services.RelationService;
 import com.codeactuator.samriddhi.services.impl.RelationServiceImpl;
+import com.codeactuator.samriddhi.util.RelationUtil;
 
 public class App {
 
 
 
     public static void main(String args[]){
-        RelationService relationService = new RelationServiceImpl();
+        RelationUtil relationUtil = RelationUtil.getInstance();
+        Relation relation = new Relation();
+        relation.setX(1);
+        relation.setY(1);
+        relation.setSex(1);
+        relation.setInlaw(false);
+        relation.setSibling(false);
+        relation.setOwner(true);
 
-        //relationService.find("NEHA", "ANJALI", "SHEKHAR");
-        //relationService.find("NEHA", "ROHIT", "SHEKHAR");
-        //relationService.find("NEHA", "SHRAVAN", "SHEKHAR");
+        String relationName = relationUtil.getRelations().get(relation);
+        System.out.println(relationName);
     }
 }
 

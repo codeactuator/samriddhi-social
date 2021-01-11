@@ -12,6 +12,7 @@ import org.junit.Test;
 
 public class RelativeCalculationServiceTests {
 
+
     private RelativeCalculationService relativeCalculationService;
     private TestData testData;
     private RelationUtil relationUtil;
@@ -19,7 +20,7 @@ public class RelativeCalculationServiceTests {
     @Before
     public void init(){
         testData = new TestData();
-        relationUtil = new RelationUtil();
+        relationUtil = RelationUtil.getInstance();
         relativeCalculationService = new RelativeCalculationServiceImpl();
         assert (testData.getPeople() != null);
 

@@ -9,7 +9,7 @@ import java.util.Objects;
 public class RelationDTO implements Marshallable<Relation, RelationDTO> {
 
 
-    int id;
+    long id;
     int x;
     int y;
     int sex;
@@ -70,11 +70,11 @@ public class RelationDTO implements Marshallable<Relation, RelationDTO> {
         this.setSex(relation.getSex());
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -139,8 +139,7 @@ public class RelationDTO implements Marshallable<Relation, RelationDTO> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RelationDTO that = (RelationDTO) o;
-        return id == that.id &&
-                x == that.x &&
+        return x == that.x &&
                 y == that.y &&
                 sex == that.sex &&
                 isOwner == that.isOwner &&
@@ -151,7 +150,7 @@ public class RelationDTO implements Marshallable<Relation, RelationDTO> {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, x, y, sex, isOwner, isInlaw, isSibling);
+        return Objects.hash(x, y, sex, isOwner, isInlaw, isSibling);
     }
 
     @Override

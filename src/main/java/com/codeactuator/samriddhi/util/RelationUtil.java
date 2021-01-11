@@ -12,7 +12,18 @@ public class RelationUtil {
 
     Map<Relation, String> relations = new HashMap();
 
-    public RelationUtil() {
+    private static RelationUtil relationUtil;
+
+    public static RelationUtil getInstance(){
+        if(relationUtil == null){
+            relationUtil = new RelationUtil();
+            return relationUtil;
+        }else{
+            return relationUtil;
+        }
+    }
+
+    private RelationUtil() {
 
         Relation me = new Relation(0, 0, 1, true, false, true, Relations.ME.getRelation());
 
@@ -91,6 +102,10 @@ public class RelationUtil {
 
     public Map<Relation, String> getRelations() {
         return relations;
+    }
+
+    public void setRelations(Map<Relation, String> relations) {
+        this.relations = relations;
     }
 
     public Relation getRelationByName(Relations relationEnum){

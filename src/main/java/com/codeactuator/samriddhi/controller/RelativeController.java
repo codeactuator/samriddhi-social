@@ -1,9 +1,13 @@
 package com.codeactuator.samriddhi.controller;
 
 import com.codeactuator.samriddhi.dto.RelativeDTO;
+import com.codeactuator.samriddhi.services.RelationService;
 import com.codeactuator.samriddhi.services.RelativeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,6 +22,9 @@ public class RelativeController {
 
     @Autowired
     private RelativeService relativeService;
+
+    @Autowired
+    private RelationService relationService;
 
     @GetMapping("/ping")
     public String ping(){
@@ -37,11 +44,4 @@ public class RelativeController {
     public RelativeDTO findById(@PathVariable(value = "id") Long id){
         return relativeService.findById(id).get();
     }
-
-
-    @PostMapping
-    public RelativeDTO create(@RequestBody RelativeDTO relativeDTO){
-        return relativeService.save(relativeDTO).get();
-    }
-
 }

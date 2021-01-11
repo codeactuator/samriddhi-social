@@ -1,9 +1,12 @@
 package com.codeactuator.samriddhi.services.impl;
 
 import com.codeactuator.samriddhi.dao.PersonRepository;
+import com.codeactuator.samriddhi.dao.RelativeRepository;
 import com.codeactuator.samriddhi.domain.Person;
+import com.codeactuator.samriddhi.domain.Relative;
 import com.codeactuator.samriddhi.dto.PersonDTO;
 import com.codeactuator.samriddhi.dto.RelationDTO;
+import com.codeactuator.samriddhi.dto.RelativeDTO;
 import com.codeactuator.samriddhi.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,9 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private PersonRepository personRepository;
+
+    @Autowired
+    private RelativeRepository relativeRepository;
 
     @Override
     public Optional<PersonDTO> save(PersonDTO personDTO) {
@@ -56,6 +62,14 @@ public class PersonServiceImpl implements PersonService {
                 .forEach(person -> {
                     PersonDTO personDTO = new PersonDTO();
                     personDTO.unmarshall(person);
+
+                    if(person.getRelatives() != null) {
+                        for(Relative relative: person.getRelatives()){
+                            RelativeDTO relativeDTO = new RelativeDTO();
+                            relativeDTO.unmarshall(relative);
+                            personDTO.addRelative(relativeDTO);
+                        }
+                    }
                     personDTOS.add(personDTO);
                 });
         return Optional.of(personDTOS);
@@ -66,6 +80,16 @@ public class PersonServiceImpl implements PersonService {
         Person person = personRepository.findById(id).get();
         PersonDTO personDTO = new PersonDTO();
         personDTO.unmarshall(person);
+
+
+        if(person.getRelatives() != null) {
+            for(Relative relative: person.getRelatives()){
+                RelativeDTO relativeDTO = new RelativeDTO();
+                relativeDTO.unmarshall(relative);
+                personDTO.addRelative(relativeDTO);
+            }
+        }
+
         return Optional.of(personDTO);
     }
 
@@ -74,8 +98,40 @@ public class PersonServiceImpl implements PersonService {
         Person person = personRepository.findByName(name);
         PersonDTO personDTO = new PersonDTO();
         personDTO.unmarshall(person);
+
+
+        if(person.getRelatives() != null) {
+            for(Relative relative: person.getRelatives()){
+                RelativeDTO relativeDTO = new RelativeDTO();
+                relativeDTO.unmarshall(relative);
+                personDTO.addRelative(relativeDTO);
+            }
+        }
+
         return Optional.of(personDTO);
     }
 
+    @Override
+    public Optional<PersonDTO> addRelative(Long personId, RelativeDTO relativeDTO) {
+        Relative relative = relativeDTO.marshall();
+        relativeRepository.save(relative);
+
+        Person person = personRepository.findById(personId).get();
+        person.addRelative(relative);
+        personRepository.save(person);
+
+
+        PersonDTO personDTO = new PersonDTO();
+        personDTO.unmarshall(person);
+        if(person.getRelatives() != null) {
+            for(Relative relativeObj: person.getRelatives()){
+                RelativeDTO relativeDTOObj = new RelativeDTO();
+                relativeDTO.unmarshall(relativeObj);
+                personDTO.addRelative(relativeDTOObj);
+            }
+        }
+
+        return Optional.of(personDTO);
+    }
 
 }

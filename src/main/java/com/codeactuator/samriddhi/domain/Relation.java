@@ -11,7 +11,7 @@ public class Relation implements Serializable {
 
     @Id
     @GeneratedValue
-    int id;
+    long id;
     int x;
     int y;
     int sex;
@@ -47,11 +47,11 @@ public class Relation implements Serializable {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

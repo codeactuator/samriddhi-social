@@ -11,7 +11,7 @@ public class TestData {
 
 
     static Map<Long, Person> people = new HashMap();
-    private RelationUtil relationUtil = new RelationUtil();
+    private RelationUtil relationUtil = RelationUtil.getInstance();
     
     public TestData(){
         //Initialize some people

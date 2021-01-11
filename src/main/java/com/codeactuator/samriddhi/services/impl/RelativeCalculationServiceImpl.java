@@ -175,8 +175,12 @@ public class RelativeCalculationServiceImpl implements RelativeCalculationServic
                 false, inLaw, isSibling) ;
         result.setOwner(relativeSomeOne.getRelationDTO().isOwner());
 
-        RelationUtil relationUtil = new RelationUtil();
-        String newRelationName = relationUtil.getRelations().get(result);
+
+        Relation relation = result.marshall();
+        relation.setId(0);
+
+        RelationUtil relationUtil = RelationUtil.getInstance();
+        String newRelationName = relationUtil.getRelations().get(relation);
         result.setName(newRelationName);
 
         //If the resulting relation is not making any sense then
@@ -185,9 +189,9 @@ public class RelativeCalculationServiceImpl implements RelativeCalculationServic
             result.setOwner(!relativeSomeOne.getRelationDTO().isOwner());
         }
 
-        System.out.println(relativeOne.getPersonDTO().getName() + "\t" + relativeOne.getRelationDTO() + "\t" + relationUtil.getRelations().get(relativeOne.getRelationDTO() ));
-        System.out.println(relativeSomeOne.getPersonDTO().getName() + "\t" + relativeSomeOne.getRelationDTO() + "\t" + relationUtil.getRelations().get(relativeSomeOne.getRelationDTO()));
-        System.out.println("RESULT" + "\t" + result + "\t" + relationUtil.getRelations().get(result));
+        System.out.println(relativeOne.getPersonDTO().getName() + "\t" + relativeOne.getRelationDTO());
+        System.out.println(relativeSomeOne.getPersonDTO().getName() + "\t" + relativeSomeOne.getRelationDTO());
+        System.out.println("RESULT" + "\t" + result);
         System.out.println("=============================================");
 
         return result;
